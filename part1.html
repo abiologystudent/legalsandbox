@@ -1,0 +1,158 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+	<meta charset="UTF-8" />
+	<title>Phaser - Making your first game, part 1</title>
+    <script src="//cdn.jsdelivr.net/phaser/2.2.2/phaser.min.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+<h2 style="color:white;"> LEGAL SANDBOX PROTOTYPE </h2>
+</head>
+<body>
+<body background="/LCW.jpg">
+
+<style>
+/* defines some boxes to put things in */
+.flex-container {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    width: 1300px;
+    height: 500px;
+}
+.flex-item { 
+    background-color: white; 
+    width: 500px;
+    height: 500px;
+    margin: 10px;
+}
+</style>
+
+
+
+<div class="flex-container">
+
+<div class="tab">
+	<button class="tablinks">PublicInfo</button>
+	<button class="tablinks">PrivateInfo</button> 
+</div>
+
+<div id="PublicInfo" class="flex-item"; style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;background:url('/pics/legalpad2.jpg');">
+
+Public info box. As you can see, once there's enough text in this box, the box will grow scroll bars... that's why we call it a scroll box! You could also place an image into the scroll box.  
+
+</div>
+
+<div id="PrivateInfo" class="flex-item"; style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;background:url('/pics/legalpad2.jpg');">
+
+Private info box. As you can see, once there's enough text in this box, the box will grow scroll bars... that's why we call it a scroll box! You could also place an image into the scroll box.  
+
+</div>
+
+  <div class="flex-item"; style="width: 700px">
+  <script src="/pics/textfile.txt">//doesnt find?? 
+  </script>
+  <select style="vertical-align:right">
+<option value="Term 1">Term1</option>
+<option value="Term 2">Term2</option>
+<option value="Term 3">Term3</option>
+</select>
+<button type="button" style="vertical-align: baseline";>Incorporate terms</button>
+<button type="button" style="vertical-align:bottom">Send to counterparty</button>
+  </div>
+
+  <div class="flex-item"; style="background:url('/pics/275px-A_small_cup_of_coffee.JPG')">MESSAGE BOX
+
+<textarea rows="15" cols="50" name="comment" form="usrform" style="resize: none";>
+Enter text here...</textarea>
+<button type="button">SEND MESSAGE</button>
+</div>
+
+
+</p>
+
+<!––above may not work in IE -->
+
+
+
+
+
+
+<script> // type="text/javascript"> is optional. 
+
+var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+var button;
+var background;
+
+var player = {  //let defines variable only within block. 
+	name: "Player 1",
+	level: 1,
+	button_toggle: "Example clause?" 
+};
+
+var contractText = readTextFile("file://pics/textfile.txt");
+
+//file lost. 
+
+window.alert(contractText);
+
+// function makeUser() {
+// 	let name = prompt("Name?");
+// 	return {
+// 		name: name, 
+// 	};
+// }
+
+function preload() {
+	game.load.image('penpic', 'notebooknpen.png');
+	//game.load.spritesheet('button', 'assets/buttons/button_sprite_sheet.png', 193, 71); //preload button thing
+}
+function create() {
+	game.add.sprite(0, 0, 'penpic');
+//	background = game.add.tileSprite(0,0,800,600,'background');
+	button = game.add.button(game.world.centerX - 95,400,'button',actionOnClick,this,2,1,0);
+	button.onInputOver.add(over, this);
+	button.onInputOut.add(out, this);
+	button.onInputUp.add(up, this);
+}
+
+function update() {
+}
+// function up() {
+// 	console.log('button up');
+// }
+// function over() {
+// 	console.log('button over');
+// }
+// function out(){
+// 	console.log('button out');
+// }
+// function actionOnClick (){
+// 	background.visible =! background.visible;
+}
+
+function readTextFile(file)
+{
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", file, false);
+    rawFile.onreadystatechange = function ()
+    {
+        if(rawFile.readyState === 4)
+        {
+            if(rawFile.status === 200 || rawFile.status == 0)
+            {
+                var allText = rawFile.responseText;
+                alert(allText);
+            }
+        }
+    }
+    rawFile.send(null);
+}
+</script>
+
+</body>
+</html>
